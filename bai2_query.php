@@ -20,12 +20,12 @@ if(isset($_POST['ten'])){
 }
 ?>
 <div>random: <?php echo rand(10,100) ?></div>
-<form action="bai2.php" method="post" onsubmit="return kiem_tra()">
+<form name="dang-ky" action="bai2_query.php" method="post" >
     <table>
         <tr>
             <td>Họ và tên</td>
             <td>
-                <input type="text" id="ten" name="ten">
+                <input type="text" class="ten" id="ten" name="ten">
             </td>
         </tr>
         <tr>
@@ -38,12 +38,21 @@ if(isset($_POST['ten'])){
             </td>
         </tr>
     </table>
+
 </form>
+
+</body>
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        $('form[name="dang-ky"]').submit(function (event) {
+            var ten=$('input.ten').val();
+            if(ten.trim()===""){
+                alert("Vui long nhap ten");
+                event.preventDefault();
+            }
 
-        alert(1);
+        });
     });
 </script>
-</body>
+
 </html>
