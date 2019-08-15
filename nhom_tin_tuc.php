@@ -22,7 +22,7 @@ $kq=mysqli_query($connection,$sql);
                 <td>Tên thể loại</td>
                 <td>Thứ tự</td>
                 <td>Ẩn hiện</td>
-                <td colspan="2">Thêm</td>
+                <td colspan="2"><a href="them_nhom.php"> Thêm</a></td>
             </tr>
         </thead>
         <tbody>
@@ -34,8 +34,8 @@ $kq=mysqli_query($connection,$sql);
                     <td><?php echo $row['category_name'] ?></td>
                     <td><?php echo $row['thu_tu'] ?></td>
                     <td><?php echo $row['status'] ?></td>
-                    <td></td>
-                    <td></td>
+                    <td><a href="sua_nhom.php?id=<?php echo $row['id'] ?>">Sửa</a></td>
+                    <td><a href="nhom_tin_tuc.php">Xóa</a></td>
                 </tr>
             <?php } ?>
         </tbody>
