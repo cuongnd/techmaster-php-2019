@@ -12,6 +12,12 @@
 <?php
 $list_category=array();
 include_once "connect.php";
+if(isset($_GET['action']) && $_GET['action']==="xoa"){
+    $id=$_GET['id'];
+    $sql="DELETE FROM `news`.`categories` WHERE id=".$id;
+    mysqli_query($connection,$sql);
+    header('location:nhom_tin_tuc.php');
+}
 $sql="SELECT * FROM `news`.`categories`";
 $kq=mysqli_query($connection,$sql);
 //thục hiện việc đổ dữ liệu vào $list_category;
@@ -35,7 +41,7 @@ $kq=mysqli_query($connection,$sql);
                     <td><?php echo $row['thu_tu'] ?></td>
                     <td><?php echo $row['status'] ?></td>
                     <td><a href="sua_nhom.php?id=<?php echo $row['id'] ?>">Sửa</a></td>
-                    <td><a href="nhom_tin_tuc.php">Xóa</a></td>
+                    <td><a href="nhom_tin_tuc.php?action=xoa&id=<?php echo $row['id'] ?>">Xóa</a></td>
                 </tr>
             <?php } ?>
         </tbody>
