@@ -15,12 +15,12 @@ if(isset($_POST['luu'])){
     $mo_ta_ngan=$_POST['mo_ta_ngan'];
     $mo_ta=$_POST['mo_ta'];
     $category_id=$_POST['category_id'];
-    $sql="INSERT INTO `news`.`tin_tuc` (`id`,`category_id`, `tieu_de`, `noi_dung_ngan`, `noi_dung`, `trang_thai`, `tin_noi_bat`, `tin_lien_quan`, `danh_gia`) VALUES (NULL,$category_id, '$tieu_de', '$mo_ta_ngan', '$mo_ta', '1', '1', '', '');";
+    $sql="INSERT INTO `tin_tuc` (`id`,`category_id`, `tieu_de`, `noi_dung_ngan`, `noi_dung`, `trang_thai`, `tin_noi_bat`, `tin_lien_quan`, `danh_gia`) VALUES (NULL,$category_id, '$tieu_de', '$mo_ta_ngan', '$mo_ta', '1', '1', '', '');";
     mysqli_query($connection,$sql);
     header("location:tin_tuc.php");
 
 }
-$sql="SELECT * FROM `news`.`categories`";
+$sql="SELECT * FROM `categories`";
 $kq=mysqli_query($connection,$sql);
 
 

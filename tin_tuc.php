@@ -14,11 +14,12 @@ $list_category=array();
 include_once "connect.php";
 if(isset($_GET['action']) && $_GET['action']==="xoa"){
     $id=$_GET['id'];
-    $sql="DELETE FROM `news`.`tin_tuc` WHERE id=".$id;
+    $sql="DELETE FROM `tin_tuc` WHERE id=".$id;
     mysqli_query($connection,$sql);
     header('location:tin_tuc.php');
 }
-$sql="SELECT * FROM `news`.`tin_tuc`";
+$sql="SELECT a_tin_tuc.*,a_categories.`id` AS category_id,a_categories.`category_name` AS category_name FROM `tin_tuc` AS a_tin_tuc LEFT JOIN `categories` AS a_categories ON a_tin_tuc.`category_id`=a_categories.`id`";
+
 $kq=mysqli_query($connection,$sql);
 //thục hiện việc đổ dữ liệu vào $list_category;
 ?>
@@ -27,6 +28,7 @@ $kq=mysqli_query($connection,$sql);
     <tr>
         <td>tiêu đề tin tức</td>
         <td>mô tả ngắn</td>
+        <td>Nhóm tin tức</td>
         <td>Ẩn hiện</td>
         <td colspan="2"><a href="them_tin_tuc.php"> Thêm</a></td>
     </tr>
@@ -39,6 +41,7 @@ $kq=mysqli_query($connection,$sql);
         <tr>
             <td><?php echo $row['tieu_de'] ?></td>
             <td><?php echo $row['noi_dung_ngan'] ?></td>
+            <td><?php echo $row['category_name'] ?></td>
             <td><?php echo $row['trang_thai'] ?></td>
             <td><a href="sua_tin_tuc.php?id=<?php echo $row['id'] ?>">Sửa</a></td>
             <td><a href="tin_tuc.php?action=xoa&id=<?php echo $row['id'] ?>">Xóa</a></td>

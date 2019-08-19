@@ -14,11 +14,11 @@ $list_category=array();
 include_once "connect.php";
 if(isset($_GET['action']) && $_GET['action']==="xoa"){
     $id=$_GET['id'];
-    $sql="DELETE FROM `news`.`categories` WHERE id=".$id;
+    $sql="DELETE FROM `categories` WHERE id=".$id;
     mysqli_query($connection,$sql);
     header('location:nhom_tin_tuc.php');
 }
-$sql="SELECT * FROM `news`.`categories`";
+$sql="SELECT * FROM `categories`";
 $kq=mysqli_query($connection,$sql);
 //thục hiện việc đổ dữ liệu vào $list_category;
 ?>

@@ -14,7 +14,7 @@ if (isset($_POST['them'])) {
     $category_name=$_POST['category_name'];
     $thu_tu=$_POST['thu_tu'];
     $status=$_POST['status'];
-    $sql = "INSERT INTO `news`.`categories` (`id`, `category_name`, `thu_tu`, `status`) VALUES (NULL, '$category_name', $thu_tu, $status)";
+    $sql = "INSERT INTO `categories` (`id`, `category_name`, `thu_tu`, `status`) VALUES (NULL, '$category_name', $thu_tu, $status)";
     mysqli_query($connection,$sql);
     header("location:nhom_tin_tuc.php");
 }

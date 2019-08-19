@@ -19,14 +19,14 @@ if(isset($_POST['sua']) && $_POST['sua']=="sua"){
     $noi_dung=$_POST['noi_dung'];
     $tieu_de=$_POST['tieu_de'];
     $trang_thai=$_POST['trang_thai'];
-    $sql="UPDATE `news`.`tin_tuc` SET `tieu_de` = '$tieu_de',`noi_dung_ngan` = '$noi_dung_ngan',`noi_dung` = '$noi_dung',`trang_thai` = '$trang_thai' WHERE `tin_tuc`.`id` = $id;";
+    $sql="UPDATE `tin_tuc` SET `tieu_de` = '$tieu_de',`noi_dung_ngan` = '$noi_dung_ngan',`noi_dung` = '$noi_dung',`trang_thai` = '$trang_thai' WHERE `tin_tuc`.`id` = $id;";
     mysqli_query($connection,$sql);
     header("location:tin_tuc.php");
 
 }
 if(isset($_GET['id']) && $_GET['id']!=0){
     $id=$_GET['id'];
-    $sql="SELECT * FROM `news`.`tin_tuc` where id=".$id;
+    $sql="SELECT * FROM `tin_tuc` where id=".$id;
     $kq=mysqli_query($connection,$sql);
     $item=mysqli_fetch_array($kq);
 }

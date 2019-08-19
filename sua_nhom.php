@@ -17,14 +17,14 @@ if(isset($_POST['sua']) && $_POST['sua']=="sua"){
     $category_name=$_POST['category_name'];
     $thu_tu=$_POST['thu_tu'];
     $status=$_POST['status'];
-    $sql="UPDATE `news`.`categories` SET `category_name` = '$category_name', `thu_tu`='$thu_tu',`status`='$status' WHERE `categories`.`id` = $id;";
+    $sql="UPDATE `categories` SET `category_name` = '$category_name', `thu_tu`='$thu_tu',`status`='$status' WHERE `categories`.`id` = $id;";
     mysqli_query($connection,$sql);
     header("location:nhom_tin_tuc.php");
 
 }
 if(isset($_GET['id']) && $_GET['id']!=0){
     $id=$_GET['id'];
-    $sql="SELECT * FROM `news`.`categories` where id=".$id;
+    $sql="SELECT * FROM `categories` where id=".$id;
     $kq=mysqli_query($connection,$sql);
     $item=mysqli_fetch_array($kq);
 }
