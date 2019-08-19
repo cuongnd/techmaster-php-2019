@@ -19,7 +19,8 @@ if(isset($_POST['sua']) && $_POST['sua']=="sua"){
     $noi_dung=$_POST['noi_dung'];
     $tieu_de=$_POST['tieu_de'];
     $trang_thai=$_POST['trang_thai'];
-    $sql="UPDATE `tin_tuc` SET `tieu_de` = '$tieu_de',`noi_dung_ngan` = '$noi_dung_ngan',`noi_dung` = '$noi_dung',`trang_thai` = '$trang_thai' WHERE `tin_tuc`.`id` = $id;";
+    $category_id=$_POST['category_id'];
+    $sql="UPDATE `tin_tuc` SET `category_id`='$category_id', `tieu_de` = '$tieu_de',`noi_dung_ngan` = '$noi_dung_ngan',`noi_dung` = '$noi_dung',`trang_thai` = '$trang_thai' WHERE `tin_tuc`.`id` = $id;";
     mysqli_query($connection,$sql);
     header("location:tin_tuc.php");
 
@@ -30,6 +31,8 @@ if(isset($_GET['id']) && $_GET['id']!=0){
     $kq=mysqli_query($connection,$sql);
     $item=mysqli_fetch_array($kq);
 }
+$sql="SELECT * FROM `categories`";
+$kq=mysqli_query($connection,$sql);
 ?>
 <form action="sua_tin_tuc.php?id=<?php echo $item['id'] ?>" method="post">
     <table style="margin: 20px auto" border="1">
@@ -53,6 +56,17 @@ if(isset($_GET['id']) && $_GET['id']!=0){
                     <option <?php echo $item['trang_thai']==0? ' selected ':'' ?> value="0">Ẩn</option>
                 </select>
 
+            </td>
+        </tr>
+        <tr>
+            <td>Nhóm tin tức</td>
+            <td>
+                <select name="category_id">
+                    <?php while ($row=mysqli_fetch_array($kq)){ ?>
+
+                        <option <?php echo $item["category_id"]==$row["id"]?' selected ':'' ?> value="<?php echo $row["id"] ?>"><?php echo $row["category_name"] ?></option>
+                    <?php } ?>
+                </select>
             </td>
         </tr>
         <tr>
