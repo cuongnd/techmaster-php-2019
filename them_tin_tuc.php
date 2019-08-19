@@ -14,13 +14,16 @@ if(isset($_POST['luu'])){
     $tieu_de=$_POST['tieu_deu'];
     $mo_ta_ngan=$_POST['mo_ta_ngan'];
     $mo_ta=$_POST['mo_ta'];
-    $sql="INSERT INTO `news`.`tin_tuc` (`id`, `tieu_de`, `noi_dung_ngan`, `noi_dung`, `trang_thai`, `tin_noi_bat`, `tin_lien_quan`, `danh_gia`) VALUES (NULL, '$tieu_de', '$mo_ta_ngan', '$mo_ta', '1', '1', '', '');";
+    $category_id=$_POST['category_id'];
+    $sql="INSERT INTO `news`.`tin_tuc` (`id`,`category_id`, `tieu_de`, `noi_dung_ngan`, `noi_dung`, `trang_thai`, `tin_noi_bat`, `tin_lien_quan`, `danh_gia`) VALUES (NULL,$category_id, '$tieu_de', '$mo_ta_ngan', '$mo_ta', '1', '1', '', '');";
     mysqli_query($connection,$sql);
     header("location:tin_tuc.php");
 
 }
-$sql="SELECT * FROM `categories`";
+$sql="SELECT * FROM `news`.`categories`";
 $kq=mysqli_query($connection,$sql);
+
+
 ?>
     <form action="them_tin_tuc.php" method="post">
         <table border="1" style="margin: 20px auto">
@@ -41,6 +44,7 @@ $kq=mysqli_query($connection,$sql);
                 <td>
                     <select name="category_id">
                         <?php while ($row=mysqli_fetch_array($kq)){ ?>
+
                         <option value="<?php echo $row["id"] ?>"><?php echo $row["category_name"] ?></option>
                         <?php } ?>
                     </select>
