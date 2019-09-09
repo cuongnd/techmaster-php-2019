@@ -6,6 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/styles/main_style.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script src="assets/js/ckeditor/ckeditor.js"></script>
     <title>Sửa tin tuc</title>
 </head>
 <body>
@@ -57,11 +63,16 @@ $kq = mysqli_query($connection, $sql);
         <table style="margin: 20px auto" border="1">
             <tr>
                 <td>Tiêu đề</td>
-                <td><input type="text" name="tieu_de" value="<?php echo $item['tieu_de'] ?>"></td>
+                <td><input type="text"  name="tieu_de" value="<?php echo $item['tieu_de'] ?>"></td>
             </tr>
             <tr>
                 <td>Ảnh đại diện</td>
-                <td><img class="anh-dai-dien" src="<?php echo $item['anh_dai_dien'] ?>"><input type="file" name="anh_dai_dien"></td>
+                <td>
+                    <div class="wrapper-image">
+                        <img id="img-anh-dai-dien" class="anh-dai-dien" src="<?php echo $item['anh_dai_dien'] ?>"><input id="anh_dai_dien" type="file" name="anh_dai_dien">
+                        <button type="button" id="xoa-and-dien" class="xoa">Xóa</button>
+                    </div>
+                </td>
             </tr>
 
             <tr>
@@ -70,7 +81,7 @@ $kq = mysqli_query($connection, $sql);
             </tr>
             <tr>
                 <td>Nội dung</td>
-                <td><textarea name="noi_dung"><?php echo $item['noi_dung'] ?></textarea></td>
+                <td><textarea id="noi-dung" name="noi_dung"><?php echo $item['noi_dung'] ?></textarea></td>
             </tr>
             <tr>
                 <td>Ẩn hiện</td>
@@ -104,5 +115,29 @@ $kq = mysqli_query($connection, $sql);
         <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
     </form>
 </div>
+<script type="text/javascript">
+    $=jQuery;
+    CKEDITOR.replace( 'noi-dung' );// tham số là biến name của textarea
+    var root_image="<?php echo $item['anh_dai_dien'] ?>";
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#img-anh-dai-dien').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#anh_dai_dien").change(function() {
+        readURL(this);
+    });
+    $('#xoa-and-dien').click(function (event) {
+        $('#img-anh-dai-dien').attr('src',root_image);
+        $('#anh_dai_dien').val("");
+    });
+</script>
 </body>
 </html>

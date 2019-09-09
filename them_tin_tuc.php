@@ -5,6 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script src="assets/js/ckeditor/ckeditor.js"></script>
+    <link href="assets/styles/main_style.css" rel="stylesheet">
+
     <title>Thêm tin tức</title>
 </head>
 <body>
@@ -21,6 +28,7 @@ if(isset($_POST['luu'])){
 
 
     $sql="INSERT INTO `tin_tuc` (`id`,`category_id`, `tieu_de`, `noi_dung_ngan`, `noi_dung`, `trang_thai`, `tin_noi_bat`, `tin_lien_quan`, `danh_gia`) VALUES (NULL,$category_id, '$tieu_de', '$mo_ta_ngan', '$mo_ta', '1', '1', '', '');";
+
     mysqli_query($connection,$sql);
     $last_id = mysqli_insert_id($connection);
     //update image
@@ -40,6 +48,7 @@ $kq=mysqli_query($connection,$sql);
 
 
 ?>
+<div class="them-tin-tuc">
     <form action="them_tin_tuc.php" method="post" enctype="multipart/form-data">
         <table border="1" style="margin: 20px auto">
             <tr>
@@ -48,7 +57,10 @@ $kq=mysqli_query($connection,$sql);
             </tr>
             <tr>
                 <td>Ảnh đại diện</td>
-                <td><input type="file" name="anh_dai_dien"></td>
+                <td>
+                    <img id="img-anh-dai-dien" src="">
+                    <input type="file" id="anh_dai_dien" name="anh_dai_dien">
+                </td>
             </tr>
             <tr>
                 <td>Mô tả ngắn</td>
@@ -56,7 +68,7 @@ $kq=mysqli_query($connection,$sql);
             </tr>
             <tr>
                 <td>Mô tả</td>
-                <td><textarea name="mo_ta"></textarea></td>
+                <td><textarea id="mo_ta" name="mo_ta"></textarea></td>
             </tr>
             <tr>
                 <td>Nhóm tin tức</td>
@@ -76,5 +88,24 @@ $kq=mysqli_query($connection,$sql);
             </tr>
         </table>
     </form>
+</div>
+    <script type="text/javascript">
+        $=jQuery;
+        CKEDITOR.replace( 'mo_ta' );// tham số là biến name của textarea
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#img-anh-dai-dien').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#anh_dai_dien").change(function() {
+            readURL(this);
+        });
+    </script>
 </body>
 </html>

@@ -36,6 +36,7 @@ if(isset($_POST['a']) && isset($_POST['b'])){
         $x=round($x);
         $nghiem="x=$x";
     }
+
 }
 ?>
 <form class="phuong-trinh-b1" action="giai_pt_bac_1.php" method="post">

@@ -1,7 +1,10 @@
 .tin-tuc .anh-dai-dien{
-    width: 100px;
+    width: 200px;
 }
 .sua-tin-tuc .anh-dai-dien
 {
-    width: 100px;
+    width: 200px;
+}
+.them-tin-tuc #img-anh-dai-dien{
+    width: 200px;
 }
